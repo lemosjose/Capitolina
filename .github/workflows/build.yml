@@ -1,0 +1,27 @@
+name: Build and Test Bot, simple and quick
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+
+      - name: Download dependencies
+        run: go mod download
+
+      - name: Build application
+        run: go build -v ./bot/main.go
+
+      - name: Run tests
+        run: go test -v ./...
