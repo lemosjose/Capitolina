@@ -20,7 +20,7 @@ func StartHandler(ctx *th.Context, update telego.Update) error {
 func AboutHandler(ctx *th.Context, update telego.Update) error {
 	_, _ = ctx.Bot().SendMessage(ctx, tu.Message(
 		tu.ID(update.Message.Chat.ID),
-		"My programmer is José Lemos, reach him on linkedin.com/in/lemosjose and read his posts at lemosjose.github.io \n My source code is located in https://github.com/lemosjose/capitolina",
+		"My programmer is José Lemos, reach him on linkedin.com/in/lemosjose and read his posts at lemosjose.github.io \n (or https://lemosjose.me) \n My source code is located in https://github.com/lemosjose/capitolina",
 	))
 
 	return nil
@@ -29,7 +29,7 @@ func AboutHandler(ctx *th.Context, update telego.Update) error {
 func HelpHandler(ctx *th.Context, update telego.Update) error {
 	const helpMessage = `
 	*/download <book> [author]*
-	Searches for direct PDF or EPUB download links from Google Books. If none are found, it tries OpenLibrary.
+	Searches for direct PDF or EPUB download links from Google Books. If none are found
 	_Example: /download Hamlet Shakespeare_ 
 	Prefer something like /download "Hamlet" "Shakespeare", keep that suggestion for other commands
 
@@ -40,6 +40,11 @@ func HelpHandler(ctx *th.Context, update telego.Update) error {
 	*/aisynopsis <book> [author]*
 	Forces the bot to generate a summary using Google Gemini 2.0 Flash, ignoring the official description. Great for shorter, creative summaries.
 	_Example: /aisynopsis Dom Casmurro_
+
+	*/openlibrary <book> [author]*
+	Gets the OpenLibrary link for the specified book and author.
+	_Example: /openlibrary "Pride and Prejudice" "Jane Austen"_
+	Format with strings in quotes to avoid issues with the bot parsing spaces.
 
 	*/about*
 	Information about the creator and source code.
